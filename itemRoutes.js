@@ -1,12 +1,12 @@
 const express = require("express");
-const { items } = require("./fakeDb");
+const db = require("./fakeDb");
 
 const router = new express.Router();
 
 
 router.get("/", function (req, res) {
 
-    return res.json(items);
+    return res.json(`{items: ${db.items}}`);
 })
 
 
@@ -16,7 +16,7 @@ router.post("/", function (req, res) {
         price: parseFloat(req.body.price)
     };
 
-    items.push(newItem);
+    db.items.push(newItem);
     debugger
     return res.json({ added: newItem });
 })
